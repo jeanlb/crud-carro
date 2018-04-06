@@ -1,16 +1,3 @@
-# crud-carro
-
-# Projeto minimalista para exemplo de um CRUD em PHP.
-
-# Características:
-
-# - Arquitetura MVC
-# - MySQLi para conexão com o banco de dados
-# - Upload de imagens
-# - Geração de PDF's com a biblioteca TCPDF (aumentando o tamanho do projeto para mais de 10 mb)
-
-# ==== Sobre as fontes da biblioteca TCPDF neste projeto ====
-
 # Apenas as fontes essenciais. 
 # Outras fontes foram removidas deste projeto exemplo para diminuir o tamanho do mesmo,
 # pois com todas as fontes o tamanho do projeto chegava a 14 mb.
@@ -32,4 +19,4 @@
 # timesI : Times New Roman Italic
 # zapfdingbats : Zapf Dingbats
 
-# Referência: https://tcpdf.org/docs/fonts/
+# Referência: https://tcpdf.org/docs/fonts/ 
