@@ -1,7 +1,16 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 
+	/* 
+	 * Verificar e pegar localização do arquivo à incluir. É preciso 
+	 * verificar a localização devido aos includes realizados em outras páginas. 
+	*/
+	$filePath = '../model/carro.php';
+	if (! @file_exists($filePath)) {
+		$filePath = '../../model/carro.php';
+	}
+
+	require_once($filePath);
 	require_once('conexao.php');
-	require_once('../model/carro.php');
 	
 	class CarroDAO extends Conexao {
 

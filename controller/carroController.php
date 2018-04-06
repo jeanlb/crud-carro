@@ -1,7 +1,23 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 
+	/* 
+	 * Verificar e pegar localização do arquivo à incluir. É preciso 
+	 * verificar a localização devido aos includes realizados em outras páginas.
+	 * Exemplo com array. 
+	*/
+	$include_dirs = array(
+		'../dao/carroDAO.php',
+		'../../dao/carroDAO.php'
+	);
+	
+	foreach ($include_dirs as $include_path) {
+		if (@file_exists($include_path)) {
+			require_once($include_path);
+			break;
+		}
+	}
+
 	require_once("controller.php");
-	require_once("../dao/carroDAO.php");
 
 	// instanciar a classe aqui caso nao seja usada heranca (neste caso esta sendo instanciada no final). a instanciacao eh nos casos via requisicao
 	// new CarroController();
@@ -104,6 +120,7 @@
 		}
 
 		private function salvarImagemEPegarCaminho() {
+			//Fonte: https://www.w3schools.com/php/php_file_upload.asp
 
 			$config = parse_ini_file("../conf/application.ini"); // ler arquivo de configuracao
 			$diretorioUpload = $config['upload_directory']; // diretorio do xampp nao dá permissao para upload. no linux, é preciso dar permissao chmod 777

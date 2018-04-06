@@ -10,8 +10,19 @@
 
 		function __construct() {
 
-			$config = parse_ini_file("../conf/application.ini"); // ler arquivo de configuracao
+			/* 
+			 * Verificar e pegar localização do arquivo de configuração. É preciso 
+			 * verificar a localização devido aos includes realizados em outras páginas. 
+			*/
+			$filePath = '../conf/application.ini';
+			if (! @file_exists($filePath)) {
+				$filePath = '../../conf/application.ini';
+			}
 
+			// ler arquivo de configuracao
+			$config = parse_ini_file($filePath);
+
+			// Ler e pegar configurações
 			$this -> servername = $config['servername'];
 		    $this -> username = $config['username'];
 		    $this -> password = $config['password'];

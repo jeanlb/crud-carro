@@ -22,6 +22,7 @@
 <body>
 	<a href="create.php">Adicionar um Carro</a> | 
 	<a href="listar_clientes.php">Clientes</a> | 
+	<a href="report/carros.php" target="_blank">Gerar PDF</a> | 
 	<a href="../controller/loginController.php?acao=logout">Deslogar</a> | 
 	<span>Bem-vindo, <?php echo $_SESSION['login_user']['nome']; ?>!</span> 
 	<br/><br/>
