@@ -8,5 +8,3 @@
 # - MySQLi para conexão com o banco de dados
 # - Upload de imagens
 # - Geração de PDF's com a biblioteca TCPDF (aumentando o tamanho do projeto para mais de 10 mb)
-
-# teste
