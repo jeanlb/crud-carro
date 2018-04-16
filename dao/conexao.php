@@ -16,7 +16,7 @@
 			*/
 			$filePath = '../conf/application.ini';
 			if (! @file_exists($filePath)) {
-				$filePath = '../../conf/application.ini';
+				$filePath = '../' . $filePath;
 			}
 
 			// ler arquivo de configuracao

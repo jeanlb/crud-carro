@@ -35,17 +35,19 @@
 		                <th>Marca</th>  
 		                <th>Ano</th>
 		                <th>Cor</th>
-		                <th>Placa</th>  
+		                <th>Placa</th>
+		                <th>Cliente</th>  
 		           	</tr>';
 
-			foreach ($carros as $carro) { 
+			foreach ($carros as $carroDTO) { 
 				$tabela .= '<tr>  
-			                 	<td>'. $carro -> getId()    .'</td>  
-			                  	<td>'. $carro -> getNome()  .'</td>  
-			                  	<td>'. $carro -> getMarca() .'</td>  
-			                  	<td>'. $carro -> getAno()   .'</td>
-			                  	<td>'. $carro -> getCor()   .'</td>
-			                  	<td>'. $carro -> getPlaca() .'</td>  
+			                 	<td>'. $carroDTO -> getId()    .'</td>  
+			                  	<td>'. $carroDTO -> getNome()  .'</td>  
+			                  	<td>'. $carroDTO -> getMarca() .'</td>  
+			                  	<td>'. $carroDTO -> getAno()   .'</td>
+			                  	<td>'. $carroDTO -> getCor()   .'</td>
+			                  	<td>'. $carroDTO -> getPlaca() .'</td>
+			                  	<td>'. $carroDTO -> getNomeCliente() .'</td>  
 			    			</tr>';  
 			}
 			$tabela .= '</table>';
@@ -60,7 +62,7 @@
 	// Listar os carros
 	require_once("../../controller/carroController.php");
 	$carroController = new CarroController();
-	$carros = $carroController -> listar();
+	$carros = $carroController -> listarCarrosComClientes();
 
 	// Renderizar tabela passando carros
 	$tabela = $pdf -> renderizarTabelaDeCarros($carros);  

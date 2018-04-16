@@ -2,14 +2,22 @@
 
 	/* 
 	 * Verificar e pegar localização do arquivo à incluir. É preciso 
-	 * verificar a localização devido aos includes realizados em outras páginas. 
+	 * verificar a localização devido aos includes realizados em outras páginas.
+	 * Exemplo com array. 
 	*/
-	$filePath = '../model/carro.php';
-	if (! @file_exists($filePath)) {
-		$filePath = '../../model/carro.php';
+	$include_dirs = array(
+		'../model/carro.php',
+		'../../model/carro.php',
+		'../dto/carroDTO.php',
+		'../../dto/carroDTO.php'
+	);
+	
+	foreach ($include_dirs as $include_path) {
+		if (@file_exists($include_path)) {
+			require_once($include_path);
+		}
 	}
 
-	require_once($filePath);
 	require_once('conexao.php');
 	
 	class CarroDAO extends Conexao {
@@ -36,11 +44,11 @@
 		function atualizar($carro) {
 			$this -> conectar();
 
-			$stmt = $this -> conexao -> prepare("UPDATE carro SET nome = ? ,  
+			$stmt = $this -> conexao -> prepare("UPDATE carro SET id_cliente = ?, nome = ? ,  
 				marca = ? , ano = ? , cor = ? , placa = ?, caminho_imagem = ? WHERE id = ?");
 
-			$stmt -> bind_param("ssisssi", $carro -> getNome(), $carro -> getMarca(), 
-				$carro -> getAno(), $carro -> getCor(), $carro -> getPlaca(), 
+			$stmt -> bind_param("ississsi", $carro -> getIdCliente(), $carro -> getNome(), 
+				$carro -> getMarca(), $carro -> getAno(), $carro -> getCor(), $carro -> getPlaca(), 
 				$carro -> getCaminhoImagem(), $carro -> getId());
 
 			if ($stmt -> execute() === TRUE) {
@@ -63,6 +71,26 @@
 			while ($row = $resultado -> fetch_assoc()) {
 				$carro = $this -> criarCarroDeArray($row);
 			    $lista_carro[] = $carro;
+			}
+
+			$this -> desconectar();
+
+			return $lista_carro;
+		}
+
+		public function listarCarrosComClientes() {
+			$this -> conectar();
+
+			$sql = "SELECT ca.*, p.nome AS nome_cliente 
+				FROM carro ca, cliente c, pessoa p 
+				WHERE ca.id_cliente = c.id AND c.id_pessoa = p.id;";
+
+			$resultado = $this -> conexao -> query($sql);
+
+		    $lista_carro = array();
+			while ($row = $resultado -> fetch_assoc()) {
+				$carroDTO = $this -> criarCarroDTODeArray($row);
+			    $lista_carro[] = $carroDTO;
 			}
 
 			$this -> desconectar();
@@ -113,6 +141,7 @@
 		    
 		    $carro = new Carro();
 		    $carro -> setId($row["id"]);
+		    $carro -> setIdCliente($row["id_cliente"]);
 			$carro -> setNome($row["nome"]);
 			$carro -> setMarca($row["marca"]);
 			$carro -> setAno($row["ano"]);
@@ -121,6 +150,36 @@
 			$carro -> setCaminhoImagem($row["caminho_imagem"]);
 
 		    return $carro; 
+		}
+
+		public function pegarCarroComClientePorId($id) {
+			$this -> conectar();
+
+			$stmt = $this -> conexao -> prepare("SELECT ca.*, p.nome AS nome_cliente 
+				FROM carro ca, cliente c, pessoa p 
+				WHERE ca.id_cliente = c.id AND c.id_pessoa = p.id AND ca.id = ? LIMIT 1");
+			$stmt -> bind_param("i", $id);
+			$stmt -> execute();
+			$resultado = $stmt -> get_result();
+
+			$carroDTO = new CarroDTO();
+			while ($row = $resultado -> fetch_assoc()) {
+				$carroDTO = $this -> criarCarroDTODeArray($row);
+			}
+
+			$stmt -> close();
+			$this -> desconectar();
+
+			return $carroDTO;
+		}
+
+		private function criarCarroDTODeArray($row) {
+		    
+		    $carro = $this -> criarCarroDeArray($row);
+		    $carroDTO = new CarroDTO($carro);
+			$carroDTO -> setNomeCliente($row["nome_cliente"]); // atributo transiente de CarroDTO
+
+		    return $carroDTO; 
 		}
 
 		public function deletar($id) {

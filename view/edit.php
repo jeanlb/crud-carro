@@ -11,6 +11,11 @@
 
 	$carroController = new CarroController();
 	$carro = $carroController -> pegarCarroPorId($id);
+
+	require_once("../controller/clienteController.php");
+
+	$clienteController = new ClienteController();
+	$clientes = $clienteController -> listar();
 ?>
 
 <html>
@@ -44,6 +49,24 @@
 			<tr> 
 				<td>Placa</td>
 				<td><input type="text" name="placa" value="<?php echo $carro -> getPlaca(); ?>" required></td>
+			</tr>
+			<tr> 
+				<td>Cliente</td>
+				<td>
+					<!-- TODO: usar input datalist ou ajax para autocompletar -->
+					<select name="id_cliente" required>
+
+						<?php foreach ($clientes as $cliente) : ?>
+
+							<option value = <?php echo $cliente -> getId(); ?> 
+								<?php echo ($cliente -> getId() == $carro -> getIdCliente()) ? 'selected' : ''; ?> >
+									<?php echo $cliente -> getNome(); ?>
+							</option>
+
+						<?php endforeach; ?>
+
+					</select>
+				</td>
 			</tr>
 			<tr> 
 				<td>Imagem (jpg, jpeg, png, gif, bmp)</td>

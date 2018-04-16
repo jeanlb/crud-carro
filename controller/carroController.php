@@ -62,8 +62,16 @@
 			return $this -> carroDAO -> listar();
 		}
 
+		public function listarCarrosComClientes() {
+			return $this -> carroDAO -> listarCarrosComClientes();
+		}
+
 		public function pegarCarroPorId($id) {
 			return $this -> carroDAO -> pegarCarroPorId($id);
+		}
+
+		public function pegarCarroComClientePorId($id) {
+			return $this -> carroDAO -> pegarCarroComClientePorId($id);
 		}
 
 		private function inserir() {
@@ -96,6 +104,7 @@
 			
 			$carro = new Carro();
 			$carro -> setId($_POST['id']);
+			$carro -> setIdCliente($_POST['id_cliente']);
 			$carro -> setNome($_POST['nome']);
 			$carro -> setMarca($_POST['marca']);
 			$carro -> setAno($_POST['ano']);

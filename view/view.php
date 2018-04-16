@@ -10,7 +10,7 @@
 	$id = $_GET['id']; // id que vem da pagina de listagem
 
 	$carroController = new CarroController();
-	$carro = $carroController -> pegarCarroPorId($id);
+	$carroDTO = $carroController -> pegarCarroComClientePorId($id);
 ?>
 
 <html>
@@ -25,23 +25,27 @@
 	<table width="35%" border="0">
 		<tr> 
 			<td>Nome</td>
-			<td><input type="text" name="nome" value="<?php echo $carro -> getNome(); ?>" readonly></td>
+			<td><input type="text" value="<?php echo $carroDTO -> getNome(); ?>" readonly></td>
 		</tr>
 		<tr> 
 			<td>Marca</td>
-			<td><input type="text" name="marca" value="<?php echo $carro -> getMarca(); ?>" readonly></td>
+			<td><input type="text" value="<?php echo $carroDTO -> getMarca(); ?>" readonly></td>
 		</tr>
 		<tr> 
 			<td>Ano</td>
-			<td><input type="number" name="ano" value="<?php echo $carro -> getAno(); ?>" readonly></td>
+			<td><input type="number" value="<?php echo $carroDTO -> getAno(); ?>" readonly></td>
 		</tr>
 		<tr> 
 			<td>Cor</td>
-			<td><input type="text" name="cor" value="<?php echo $carro -> getCor(); ?>"></td>
+			<td><input type="text" value="<?php echo $carroDTO -> getCor(); ?>"></td>
 		</tr>
 		<tr> 
 			<td>Placa</td>
-			<td><input type="text" name="placa" value="<?php echo $carro -> getPlaca(); ?>" readonly></td>
+			<td><input type="text" value="<?php echo $carroDTO -> getPlaca(); ?>" readonly></td>
+		</tr>
+		<tr> 
+			<td>Cliente</td>
+			<td><input type="text" value="<?php echo $carroDTO -> getNomeCliente(); ?>" readonly></td>
 		</tr>
 		<tr>
 			<td>Imagem</td>
@@ -50,7 +54,7 @@
 			<td></td>
 			<td>
 				<?php
-					$imagem = $carro -> getCaminhoImagem();
+					$imagem = $carroDTO -> getCaminhoImagem();
 					if ($imagem != null) {
 						$imagemData = base64_encode(file_get_contents($imagem));
 						echo '<img width="500" height="400" src="data:image/jpeg;base64,' . $imagemData . '">';
