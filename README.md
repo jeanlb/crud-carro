@@ -8,7 +8,7 @@
 #### - MySQLi para conexão com o banco de dados
 #### - Autenticação com sessão
 #### - Upload de imagens
-#### - Geração de PDF's com a biblioteca TCPDF (aumentando o tamanho do projeto para mais de 10 mb)
+#### - Geração de PDF's com a biblioteca TCPDF
 
 ## === Sobre a camada Model (MVC) neste projeto ===
 

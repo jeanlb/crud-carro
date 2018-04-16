@@ -10,7 +10,7 @@
 <html>
 <head>
 	<title>Login</title>
-	<link rel="stylesheet" type="text/css" href="../resources/css/estilos.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/estilos.css">
 </head>
 <body>
 

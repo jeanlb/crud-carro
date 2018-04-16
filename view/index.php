@@ -15,8 +15,8 @@
 <head>	
 	<meta charset="utf-8">
 	<title>Homepage da Concessionária</title>
-	<link rel="stylesheet" type="text/css" href="../resources/css/estilos.css">
-	<script type="text/javascript" src="../resources/javascript/funcoes.js"></script>
+	<link rel="stylesheet" type="text/css" href="resources/css/estilos.css">
+	<script type="text/javascript" src="resources/javascript/funcoes.js"></script>
 </head>
 
 <body>
