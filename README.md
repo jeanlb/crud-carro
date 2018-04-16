@@ -17,8 +17,11 @@
 #### A camada model neste projeto contém os pacotes entity (classes/entidades que servem como espelho as tabelas no bd),
 #### dao (classes para acesso e manipulação dos dados nas tabelas do bd) e dto (objetos para transferência de dados,
 #### para os casos em que seja necessário adicionar atributos transientes após as consultas ao bd).
+#### Sobre o padrão dto, está sendo utilizado para facilitar o transporte de dados gerados de consultas com join para a camada view.
 
-#### Referência: https://stackoverflow.com/questions/5863870/how-should-a-model-be-structured-in-mvc
+#### Referências: 
+#### Model: https://stackoverflow.com/questions/5863870/how-should-a-model-be-structured-in-mvc
+#### DTO:   https://pt.stackoverflow.com/questions/31362/o-que-%C3%A9-um-dto
 
 ## === Sobre as fontes da biblioteca TCPDF neste projeto ===
 

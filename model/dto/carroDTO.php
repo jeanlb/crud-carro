@@ -25,7 +25,7 @@
 	 		/* 
 	 		   PHP não suporta multiplos construtores. 
 	 		   Esta é uma maneira de simular múltiplos construtores, em que pegamos 
-	 		   a quantidade de argumentos passados no construtor e direcionamos para algum método.
+	 		   a quantidade de argumentos passados ao construtor e direcionamos para algum método.
 	 		*/
 	 		if (sizeof($argumentos) == 1 && $argumentos[0] instanceof Carro) {
 	 			$carro = $argumentos[0];
