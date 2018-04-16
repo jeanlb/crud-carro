@@ -1,7 +1,7 @@
 <?php 
 
 	require_once('conexao.php');
-	require_once('../model/usuario.php');
+	require_once('../model/entity/usuario.php');
 	
 	class UsuarioDAO extends Conexao {
 

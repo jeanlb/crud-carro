@@ -6,10 +6,10 @@
 	 * Exemplo com array. 
 	*/
 	$include_dirs = array(
-		'../model/carro.php',
-		'../../model/carro.php',
-		'../dto/carroDTO.php',
-		'../../dto/carroDTO.php'
+		'../model/entity/carro.php',
+		'../../model/entity/carro.php',
+		'../model/dto/carroDTO.php',
+		'../../model/dto/carroDTO.php'
 	);
 	
 	foreach ($include_dirs as $include_path) {
@@ -98,6 +98,7 @@
 			return $lista_carro;
 		}
 
+		// Não está em uso
 		public function consultar($nome) {
 			$this -> conectar();
 

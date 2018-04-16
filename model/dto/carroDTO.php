@@ -1,6 +1,6 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 
-	$filePath = '../model/carro.php';
+	$filePath = '../model/entity/carro.php';
 	if (! @file_exists($filePath)) {
 		$filePath = '../' . $filePath;
 	}
@@ -11,11 +11,11 @@
 	   Classe que representa um Objeto de Transferência de Dados (DTO). 
 	   Utilizada para Relatórios e visualização de dados de um carro.
 	   Ajuda a diminuir o uso de mais de uma consulta ao banco de dados 
-	   e a evitar adicionar atributos transientes na classe modelo (Carro).
+	   e a evitar adicionar atributos transientes na classe entidade (Carro).
 	*/
 	class CarroDTO extends Carro {
 
-		// atributo que não existe no modelo/tabela Carro. Usado apenas para transferência de dados
+		// atributo que não existe na entidade/tabela Carro. Usado apenas para transferência de dados
 		private $nomeCliente;
 
 		function __construct() {
@@ -35,7 +35,7 @@
 
 		// Setar os atributos de CarroDTO com o Carro passado como parâmetro.
 		// esta maneira para criar um CarroDTO foi assim implementada pois o PHP não faz Cast de classe mae para filha.
-		function criarCarroDTO($carro) {
+		private function criarCarroDTO($carro) {
 
 			$this -> setId($carro -> getId());
 		    $this -> setIdCliente($carro -> getIdCliente());

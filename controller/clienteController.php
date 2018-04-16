@@ -1,7 +1,7 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 
 	require_once("controller.php");
-	require_once("../dao/clienteDAO.php");
+	require_once("../model/dao/clienteDAO.php");
 
 	class ClienteController extends Controller {
 

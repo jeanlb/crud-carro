@@ -6,8 +6,19 @@
 
 #### - Arquitetura MVC
 #### - MySQLi para conexão com o banco de dados
+#### - Autenticação com sessão
 #### - Upload de imagens
 #### - Geração de PDF's com a biblioteca TCPDF (aumentando o tamanho do projeto para mais de 10 mb)
+
+## === Sobre a camada Model (MVC) neste projeto ===
+
+#### A pasta (pacote) model está sendo utilizada como uma camada para manipulação dos dados (que é a maneira correta),
+#### e não apenas como uma pasta onde estão localizadas as classes que servem como entidades.
+#### A camada model neste projeto contém os pacotes entity (classes/entidades que servem como espelho as tabelas no bd),
+#### dao (classes para acesso e manipulação dos dados nas tabelas do bd) e dto (objetos para transferência de dados,
+#### para os casos em que seja necessário adicionar atributos transientes após as consultas ao bd).
+
+#### Referência: https://stackoverflow.com/questions/5863870/how-should-a-model-be-structured-in-mvc
 
 ## === Sobre as fontes da biblioteca TCPDF neste projeto ===
 

@@ -6,8 +6,8 @@
 	 * Exemplo com array. 
 	*/
 	$include_dirs = array(
-		'../dao/carroDAO.php',
-		'../../dao/carroDAO.php'
+		'../model/dao/carroDAO.php',
+		'../../model/dao/carroDAO.php'
 	);
 	
 	foreach ($include_dirs as $include_path) {

@@ -1,7 +1,7 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 
 	require_once("controller.php");
-	require_once("../dao/usuarioDAO.php");
+	require_once("../model/dao/usuarioDAO.php");
 
 	// instanciar a classe aqui caso nao seja usada heranca (neste caso esta sendo instanciada no final). a instanciacao eh nos casos via requisicao
 	// new LoginController();
