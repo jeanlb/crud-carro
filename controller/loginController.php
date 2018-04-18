@@ -3,7 +3,8 @@
 	require_once("controller.php");
 	require_once("../model/dao/usuarioDAO.php");
 
-	// instanciar a classe aqui caso nao seja usada heranca (neste caso esta sendo instanciada no final). a instanciacao eh nos casos via requisicao
+	// Instanciar a classe aqui caso nao seja usada heranca (neste caso esta sendo instanciada no final). 
+	// A instanciacao eh nos casos via requisicao.
 	// new LoginController();
 
 	class LoginController extends Controller {
@@ -11,20 +12,20 @@
 		function __construct() {
 
 			if (isset($_POST['acao'])) {
-				$acao = $_POST["acao"];
+				$this -> acao = $_POST["acao"];
 
 			} elseif (isset($_GET['acao'])) {
-				$acao = $_GET["acao"];
+				$this -> acao = $_GET["acao"];
 			}
 
-			if (isset($acao)) {
-				$this -> processarAcao($acao);
+			if (!empty($this -> acao)) {
+				$this -> processarAcao();
 			}
 		}
 
-		protected function processarAcao($acao) {
+		protected function processarAcao() {
 
-			switch ($acao) {
+			switch ($this -> acao) {
 			    case "logar":
 			        $this -> logar();
 			        break;

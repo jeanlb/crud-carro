@@ -2,7 +2,13 @@
 
 	abstract class Controller {
 
-		abstract protected function processarAcao($acao);
+		protected $acao;
+
+		function __construct() {
+			$this -> acao = "";
+		}
+
+		abstract protected function processarAcao();
 
 		// redirecionar para outra pagina (view)
 		abstract protected function redirecionarPagina();

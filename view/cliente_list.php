@@ -21,7 +21,7 @@
 
 <body>
 	<a href="../view">Home</a> | 
-	<a href="create_cliente.php">Adicionar um Cliente</a> | 
+	<a href="cliente_create.php">Adicionar um Cliente</a> | 
 	<span>Bem-vindo, <?php echo $_SESSION['login_user']['nome']; ?>!</span> 
 	<br/><br/>
 

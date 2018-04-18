@@ -83,7 +83,8 @@
 
 			$sql = "SELECT ca.*, p.nome AS nome_cliente 
 				FROM carro ca, cliente c, pessoa p 
-				WHERE ca.id_cliente = c.id AND c.id_pessoa = p.id;";
+				WHERE ca.id_cliente = c.id AND c.id_pessoa = p.id 
+				ORDER BY ca.id;";
 
 			$resultado = $this -> conexao -> query($sql);
 

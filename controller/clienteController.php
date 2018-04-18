@@ -12,20 +12,20 @@
 			$this -> clienteDAO = new ClienteDAO();
 
 			if (isset($_POST["acao"])) {
-				$acao = $_POST["acao"];
+				$this -> acao = $_POST["acao"];
 
 			} elseif (isset($_GET["acao"])) {
-				$acao = $_GET["acao"];
+				$this -> acao = $_GET["acao"];
 			}
 
-			if (isset($acao)) {
-				$this -> processarAcao($acao);
+			if (!empty($this -> acao)) {
+				$this -> processarAcao();
 			}
 		}
 
-		protected function processarAcao($acao) {
+		protected function processarAcao() {
 
-			switch ($acao) {
+			switch ($this -> acao) {
 			    case "inserir":
 			        $this -> inserir();
 			        break;
@@ -99,7 +99,7 @@
 
 		// redirecionar para a página de listagem de clientes
 		protected function redirecionarPagina() {
-			header("Location:../view/listar_clientes.php");
+			header("Location:../view/cliente_list.php");
 		}
 
 	}

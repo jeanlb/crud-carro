@@ -21,7 +21,7 @@
 
 <body>
 	<a href="../view">Home</a> | 
-	<a href="listar_clientes.php">Clientes</a> | 
+	<a href="cliente_list.php">Clientes</a> | 
 	<span>Usuário Logado: <?php echo $_SESSION['login_user']['nome']; ?></span> 
 	<br/><br/>
 	

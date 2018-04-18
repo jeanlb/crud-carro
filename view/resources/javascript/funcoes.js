@@ -1,10 +1,10 @@
 // carro
 function visualizar(id) {
-  	window.location.href='../view/view.php?id=' + id;
+  	window.location.href='../view/carro_view.php?id=' + id;
 }
 
 function editar(id) {
-  	window.location.href='../view/edit.php?id=' + id;
+  	window.location.href='../view/carro_edit.php?id=' + id;
 }
 
 function deletar(id) {
@@ -15,7 +15,7 @@ function deletar(id) {
 
 // cliente
 function editarCliente(id) {
-  	window.location.href='../view/editar_cliente.php?id=' + id;
+  	window.location.href='../view/cliente_edit.php?id=' + id;
 }
 
 function deletarCliente(idPessoa) {
