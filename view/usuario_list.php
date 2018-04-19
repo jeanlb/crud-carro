@@ -10,23 +10,22 @@
 		header("location: ../view/sem_permissao.php");
 	}
 
-	require_once("../controller/clienteController.php");
+	require_once("../controller/usuarioController.php");
 
-	$clienteController = new ClienteController();
-	$clientes = $clienteController -> listar();
+	$usuarioController = new UsuarioController();
+	$usuarios = $usuarioController -> listar();
 ?>
 
 <html lang="pt-br">
 <head>	
 	<meta charset="utf-8">
-	<title>Listagem de Usuários Fake</title>
+	<title>Listagem de Usuários</title>
 	<link rel="stylesheet" type="text/css" href="resources/css/estilos.css">
 	<script type="text/javascript" src="resources/javascript/funcoes.js"></script>
 </head>
 
 <body>
 	<a href="../view">Home</a> | 
-	<a href="cliente_create.php">Adicionar um Cliente</a> | 
 	<span>Bem-vindo, <?php echo $_SESSION['login_user']['nome']; ?>!</span> 
 	<br/><br/>
 
@@ -50,29 +49,28 @@
 				<th>ID</th>
 				<th>Nome</th>
 				<th>Email</th>
-				<th>Telefone</th>
 				<th>Data de Nascimento</th>
+				<th>Tipo</th>
 				<th>Ações</th>
 			</tr>
 		</thead>
 
 		<tbody>
 
-			<?php if ($clientes) : ?>
+			<?php if ($usuarios) : ?>
 
-			<?php foreach ($clientes as $cliente) : ?>
+			<?php foreach ($usuarios as $usuario) : ?>
 				<tr>
 					<td align="center">
-						<?php echo $cliente -> getId(); ?>
+						<?php echo $usuario -> getId(); ?>
 					</td>
-					<td><?php echo $cliente -> getNome(); ?></td>
-					<td><?php echo $cliente -> getEmail(); ?></td>
-					<td><?php echo $cliente -> getTelefone(); ?></td>
-					<td><?php echo $cliente -> getDataNascimentoFormatoPTBR(); ?></td>
+					<td><?php echo $usuario -> getNome(); ?></td>
+					<td><?php echo $usuario -> getEmail(); ?></td>
+					<td><?php echo $usuario -> getDataNascimentoFormatoPTBR(); ?></td>
+					<td><?php echo $usuario -> getTipoPorExtenso(); ?></td>
 
 					<td align="center">
-						<a id="editar" href="javascript:editarCliente('<?php echo $cliente -> getId(); ?>')">Editar</a> |
-						<a id="deletar" href="javascript:deletarCliente('<?php echo $cliente -> getIdPessoa(); ?>')">Deletar</a>
+						<a id="deletar" href="javascript:deletarUsuario('<?php echo $usuario -> getIdPessoa(); ?>')">Deletar</a>
 					</td>
 				</tr>
 			<?php endforeach; ?>

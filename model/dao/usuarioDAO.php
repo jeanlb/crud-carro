@@ -5,6 +5,36 @@
 	
 	class UsuarioDAO extends Conexao {
 
+		public function inserir($usuario) {
+
+			$foiInserido = false;
+			$this -> conectar();
+
+			$stmt = $this -> conexao -> prepare("INSERT INTO pessoa (nome, email, data_nascimento) VALUES (?, ?, ?)");
+			$stmt -> bind_param("sss", $usuario -> getNome(), $usuario -> getEmail(), $usuario -> getDataNascimento());
+
+			if ($stmt -> execute() === TRUE) {
+			    $idPessoa = $this -> conexao -> insert_id; // pegar o id da pessoa inserida
+			    $usuario -> setIdPessoa($idPessoa);
+			}
+			
+			// inserir usuario com o id da pessoa inserida
+			if ($usuario -> getIdPessoa() != NULL) {
+
+				$senhaEncriptada = base64_encode($usuario -> getSenha()); // encriptar para base64
+				
+				$stmt = $this -> conexao -> prepare("INSERT INTO usuario (id_pessoa, tipo, senha) VALUES (?, ?, ?)");
+				$stmt -> bind_param("iss", $usuario -> getIdPessoa(), $usuario -> getTipo(), $senhaEncriptada);
+
+				if ($stmt -> execute() === TRUE) $foiInserido = true;
+			}
+
+			$stmt -> close();
+		    $this -> desconectar();
+
+		    return $foiInserido;
+		}
+
 		public function pegarUsuarioPorEmailSenha($email, $senha) {
 			$this -> conectar();
 
@@ -48,7 +78,7 @@
 
 		    $lista_usuario = array();
 			while ($row = $resultado -> fetch_assoc()) {
-				$usuario = $this -> criarClienteDeArray($row);
+				$usuario = $this -> criarUsuarioDeArray($row);
 			    $lista_usuario[] = $usuario;
 			}
 
@@ -61,7 +91,7 @@
 		    
 		    $usuario = new Usuario();
 		    $usuario -> setId($row["id"]);
-		    $usuario -> setIdPessoa($row["id"]);
+		    $usuario -> setIdPessoa($row["id_pessoa"]);
 			$usuario -> setNome($row["nome"]);
 			$usuario -> setEmail($row["email"]);
 			$usuario -> setDataNascimento($row["data_nascimento"]);
@@ -69,6 +99,25 @@
 			$usuario -> setSenha(base64_decode($row["senha"])); // decodificar senha
 			
 		    return $usuario; 
+		}
+
+		public function deletar($idPessoa) {
+
+			$foiDeletado = false;
+			$this -> conectar();
+
+			$sql = "DELETE FROM pessoa WHERE id = " . $idPessoa; // deletar o usuario em cascata
+
+			if ($this -> conexao -> query($sql) === TRUE) {
+				$foiDeletado = true;
+			    echo "Registro deletado com sucesso!<br>";
+			} else {
+			    echo "Erro ao tentar deletar registro: " . $this -> conexao -> error;
+			}
+
+			$this -> desconectar();
+
+			return $foiDeletado;
 		}
 
 	}

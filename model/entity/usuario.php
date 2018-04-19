@@ -24,6 +24,14 @@
 			return $this -> tipo;
 		}
 
+		public function getTipoPorExtenso() {
+			$tipo = "Administrador";
+			if ($this -> tipo == 'F') {
+				$tipo = "Funcionário";
+			}
+			return $tipo;
+		}
+
 		public function setSenha($senha) {
 			$this -> senha = $senha;
 		}

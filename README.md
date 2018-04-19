@@ -7,6 +7,7 @@
 #### - Arquitetura MVC
 #### - MySQLi para conexão com o banco de dados
 #### - Autenticação com sessão
+#### - Autorização de acesso à páginas (usando sessão e tipo de usuário)
 #### - Upload de imagens
 #### - Geração de PDF's com a biblioteca TCPDF
 

@@ -22,7 +22,8 @@
 	<input id="senha" name="senha" placeholder="Senha do Usuário" type="password">
 
 	<input type="hidden" name="acao" value="logar">
-	<input type="submit" value="Logar">
+	<input type="submit" value="Logar"> | 
+	<a href="../view/usuario_cadastro.php">Cadastrar-se</a>
 	<br/><br/>
 
 	<div class="messages_error">

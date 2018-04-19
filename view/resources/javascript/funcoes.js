@@ -24,6 +24,13 @@ function deletarCliente(idPessoa) {
  	}
 }
 
+// usuario
+function deletarUsuario(idPessoa) {
+	if (confirm('Tem certeza de que deseja deletar este usuário?')) {
+  		window.location.href='../controller/usuarioController.php?acao=deletar&id_pessoa=' + idPessoa;
+ 	}
+}
+
 /*
 function logout() {
   	window.location.href='../controller/loginController.php?acao=logout';
