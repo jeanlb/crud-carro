@@ -16,14 +16,16 @@ CREATE TABLE pessoa(
 
 ) DEFAULT CHARSET=UTF8;
 
-INSERT INTO pessoa VALUES (1, 'admin', 'admin@ifpr.edu.br'), 
-(2, 'Cliente 1', 'cliente1@ifpr.edu.br'), 
-(3, 'Cliente 2', 'cliente2@ifpr.edu.br');
+INSERT INTO pessoa VALUES (1, 'admin', 'admin@ifpr.edu.br', '1970-01-01'), 
+(2, 'Cliente 1', 'cliente1@ifpr.edu.br', '1970-01-01'), 
+(3, 'Cliente 2', 'cliente2@ifpr.edu.br', '1970-01-01'),
+(4, 'Funcionario 1', 'func@ifpr.edu.br', '1970-01-01');
 
 -- tabela usuario
 CREATE TABLE usuario (
   id                        bigint NOT NULL AUTO_INCREMENT,
   id_pessoa                 bigint NOT NULL,
+  tipo                      CHAR(3) DEFAULT 'F' NOT NULL,
   senha   					        varchar(45) NOT NULL,
 
   CONSTRAINT pk_usuario PRIMARY KEY (id),
@@ -32,8 +34,8 @@ CREATE TABLE usuario (
 
 ) DEFAULT CHARSET=UTF8;
 
--- senha codificada em base64: admin
-INSERT INTO usuario VALUES (1, 1, 'YWRtaW4=');
+-- senha codificada em base64: para insert 1: admin | para insert 2: 12345
+INSERT INTO usuario VALUES (1, 1, 'ADM', 'YWRtaW4='), (2, 4, 'F', 'MTIzNDU=');
 
 -- tabela cliente
 CREATE TABLE cliente (

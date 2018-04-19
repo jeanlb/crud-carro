@@ -22,6 +22,14 @@
 <body>
 	<a href="carro_create.php">Adicionar um Carro</a> | 
 	<a href="cliente_list.php">Clientes</a> | 
+
+	<?php 
+		// Somente usuário ADM tem permissão para acessar este link
+		if ($_SESSION['login_user']['tipo'] == 'ADM') {
+			echo "<a href='usuario_list.php'>Usuários</a> | ";
+		}
+	?>
+
 	<a href="report/carros.php" target="_blank">Gerar PDF</a> | 
 	<a href="../controller/loginController.php?acao=logout">Deslogar</a> | 
 	<span>Bem-vindo, <?php echo $_SESSION['login_user']['nome']; ?>!</span> 

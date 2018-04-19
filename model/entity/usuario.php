@@ -5,6 +5,7 @@
 	class Usuario extends Pessoa {
 
 		private $id;
+		private $tipo;
 		private $senha;
 
 		public function setId($id) {
@@ -13,6 +14,14 @@
 
 		public function getId() {
 			return $this -> id;
+		}
+
+		public function setTipo($tipo) {
+			$this -> tipo = $tipo;
+		}
+
+		public function getTipo() {
+			return $this -> tipo;
 		}
 
 		public function setSenha($senha) {
