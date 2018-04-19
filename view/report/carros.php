@@ -1,5 +1,10 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 
+	session_start();
+	if (!isset($_SESSION['login_user'])) {
+		header("location: ../../view/login.php");
+	}
+
 	require_once('tcpdf_include.php'); // Include the main TCPDF library.
 
 	// Extender classe TCPDF. Fonte: http://softaox.info/php/generate-html-table-data-to-pdf-using-tcpdf-in-php/ 

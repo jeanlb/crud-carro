@@ -1,6 +1,14 @@
+<?php
+	session_start();
+	if (!isset($_SESSION['login_user'])) {
+		header("location: ../view/login.php");
+	}
+?>
+
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
+	<meta charset="utf-8">
 	<title>Sem permissão de acesso</title>
 </head>
 <body>
