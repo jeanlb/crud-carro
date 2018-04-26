@@ -34,7 +34,7 @@
 			$tabela .= '  
 		    	<h4 align="center">Relatório de Carros</h4> 
 		      	<table border="1" cellspacing="0" cellpadding="3">  
-		        	<tr>  
+		        	<tr bgcolor="#CCF2FF">
 		            	<th>Id</th>  
 		                <th>Nome</th>  
 		                <th>Marca</th>  

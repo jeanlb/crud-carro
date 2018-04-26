@@ -8,19 +8,8 @@
 		private $usuarioDAO;
 
 		function __construct() {
-
 			$this -> usuarioDAO = new UsuarioDAO();
-
-			if (isset($_POST['acao'])) {
-				$this -> acao = $_POST["acao"];
-
-			} elseif (isset($_GET['acao'])) {
-				$this -> acao = $_GET["acao"];
-			}
-
-			if (!empty($this -> acao)) {
-				$this -> processarAcao();
-			}
+			parent::__construct(); // chamar construtor da classe mae
 		}
 
 		protected function processarAcao() {
@@ -51,7 +40,7 @@
 
 			$foiInserido = $this -> usuarioDAO -> inserir($usuario);
 
-			// criar uma mensagem para ser exibida na página principal (de listagem)
+			// criar uma mensagem para ser exibida na página
 			$mensagem = "O usuário " . $usuario -> getNome() . " foi adicionado com sucesso! Faça o login para ter acesso ao sistema.";
 			if ($foiInserido == false) $mensagem = "Erro ao cadastrar usuário! Talvez o e-mail informado já esteja sendo utilizado.";
 			$this -> criarMensagem($mensagem);

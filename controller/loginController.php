@@ -9,20 +9,6 @@
 
 	class LoginController extends Controller {
 
-		function __construct() {
-
-			if (isset($_POST['acao'])) {
-				$this -> acao = $_POST["acao"];
-
-			} elseif (isset($_GET['acao'])) {
-				$this -> acao = $_GET["acao"];
-			}
-
-			if (!empty($this -> acao)) {
-				$this -> processarAcao();
-			}
-		}
-
 		protected function processarAcao() {
 
 			switch ($this -> acao) {

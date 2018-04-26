@@ -8,19 +8,8 @@
 		private $clienteDAO;
 
 		function __construct() {
-
 			$this -> clienteDAO = new ClienteDAO();
-
-			if (isset($_POST["acao"])) {
-				$this -> acao = $_POST["acao"];
-
-			} elseif (isset($_GET["acao"])) {
-				$this -> acao = $_GET["acao"];
-			}
-
-			if (!empty($this -> acao)) {
-				$this -> processarAcao();
-			}
+			parent::__construct(); // chamar construtor da classe mae
 		}
 
 		protected function processarAcao() {

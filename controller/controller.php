@@ -6,6 +6,17 @@
 
 		function __construct() {
 			$this -> acao = "";
+
+			if (isset($_POST['acao'])) {
+				$this -> acao = $_POST["acao"];
+
+			} elseif (isset($_GET['acao'])) {
+				$this -> acao = $_GET["acao"];
+			}
+
+			if (!empty($this -> acao)) {
+				$this -> processarAcao();
+			}
 		}
 
 		abstract protected function processarAcao();
