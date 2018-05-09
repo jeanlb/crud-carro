@@ -28,7 +28,7 @@
 
 		function __construct() {
 			$this -> carroDAO = new CarroDAO();
-			parent::__construct(); // chamar construtor da classe mae
+			parent :: __construct(); // chamar construtor da classe mae de maneira estatica (::)
 		}
 
 		protected function processarAcao() {
