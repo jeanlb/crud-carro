@@ -39,7 +39,7 @@
 
 					session_start();
 					//$_SESSION['login_user'] = $usuario -> getNome(); // Initializing Session
-					$_SESSION['login_user'] = array(); // Initializing Session com array, para armazenar variaveis de sessao
+					$_SESSION['login_user'] = array(); // Inicializando Session com array, para armazenar variaveis de sessao
 					$_SESSION['login_user']['nome'] = $usuario -> getNome();
 					$_SESSION['login_user']['tipo'] = $usuario -> getTipo();
 					$this -> redirecionarPagina();

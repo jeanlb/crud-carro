@@ -14,9 +14,17 @@
 			 * Verificar e pegar localização do arquivo de configuração. É preciso 
 			 * verificar a localização devido aos includes realizados em outras páginas. 
 			*/
-			$filePath = '../conf/application.ini';
-			if (! @file_exists($filePath)) {
-				$filePath = '../' . $filePath;
+			$include_dirs = array(
+				'conf/application.ini',
+				'../conf/application.ini',
+				'../../conf/application.ini',
+			);
+			
+			$filePath = "";
+			foreach ($include_dirs as $include_path) {
+				if (@file_exists($include_path)) {
+					$filePath = $include_path;
+				}
 			}
 
 			// ler arquivo de configuracao

@@ -6,6 +6,7 @@
 	 * Exemplo com array. 
 	*/
 	$include_dirs = array(
+		'model/dao/carroDAO.php',
 		'../model/dao/carroDAO.php',
 		'../../model/dao/carroDAO.php'
 	);

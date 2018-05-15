@@ -6,8 +6,10 @@
 	 * Exemplo com array. 
 	*/
 	$include_dirs = array(
+		'model/entity/carro.php',
 		'../model/entity/carro.php',
 		'../../model/entity/carro.php',
+		'model/dto/carroDTO.php',
 		'../model/dto/carroDTO.php',
 		'../../model/dto/carroDTO.php'
 	);

@@ -1,11 +1,15 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 
-	$filePath = '../model/entity/carro.php';
-	if (! @file_exists($filePath)) {
-		$filePath = '../' . $filePath;
+	$include_dirs = array(
+		'model/entity/carro.php',
+		'../model/entity/carro.php'
+	);
+	
+	foreach ($include_dirs as $include_path) {
+		if (@file_exists($include_path)) {
+			require_once($include_path);
+		}
 	}
-
-	require_once($filePath);
 
 	/** 
 	   Classe que representa um Objeto de Transferência de Dados (DTO). 
