@@ -175,7 +175,7 @@
 			$this -> redirecionarPagina();
 		}
 
-		// redireciona para pagina principal (index.php)
+		// redireciona para view/index.php, que redireciona para pagina principal (crud-carro/index.php)
 		protected function redirecionarPagina() {
 			header("Location:../view");
 		}

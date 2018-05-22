@@ -38,7 +38,6 @@
 				if ($usuario -> getNome() != NULL) {
 
 					session_start();
-					//$_SESSION['login_user'] = $usuario -> getNome(); // Initializing Session
 					$_SESSION['login_user'] = array(); // Inicializando Session com array, para armazenar variaveis de sessao
 					$_SESSION['login_user']['nome'] = $usuario -> getNome();
 					$_SESSION['login_user']['tipo'] = $usuario -> getTipo();
@@ -57,11 +56,11 @@
 			
 			session_start();
 			if (session_destroy()) { 				   // Destroying All Sessions
-				header("Location: ../view/login.php"); // Redirecting To Home Page
+				header("Location: ../view/login.php"); // Redirecting To Login Page
 			}
 		}
 
-		// redireciona para pagina principal (index.php)
+		// redireciona para view/index.php, que redireciona para pagina principal (crud-carro/index.php)
 		protected function redirecionarPagina() {
 			header("Location:../view");
 		}

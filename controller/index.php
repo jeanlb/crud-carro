@@ -8,9 +8,6 @@
 	   	a melhor opção é configurar o Apache para não ser permitido 
 	   	visualizar o conteúdo das pastas pelo browser (para não ter 
 	   	que criar vários index.php como este nas pastas).
-	   	Neste exemplo, também está servindo para que os arquivos
-	   	na pasta view façam o redirecionamento para a página principal
-	   	na raiz do projeto (crud-carro/index.php)
 	*/
 	header("Location: ../");
 ?>
