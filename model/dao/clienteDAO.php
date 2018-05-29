@@ -1,7 +1,21 @@
 <?php 
 
+	$include_dirs = array(
+		'model/entity/cliente.php',
+		'../model/entity/cliente.php',
+		'../../model/entity/cliente.php',
+		'model/dto/clienteDTO.php',
+		'../model/dto/clienteDTO.php',
+		'../../model/dto/clienteDTO.php'
+	);
+	
+	foreach ($include_dirs as $include_path) {
+		if (@file_exists($include_path)) {
+			require_once($include_path);
+		}
+	}
+
 	require_once('conexao.php');
-	require_once('../model/entity/cliente.php');
 	
 	class ClienteDAO extends Conexao {
 
@@ -106,6 +120,38 @@
 			$cliente -> setDataNascimento($row["data_nascimento"]);
 
 		    return $cliente; 
+		}
+
+		// traz a lista de grupos concatenados
+		public function listarClientesComGrupos() {
+			$this -> conectar();
+
+			$sql = "SELECT c.id, c.id_pessoa, c.telefone, p.nome, p.email, p.data_nascimento, 
+					GROUP_CONCAT(g.nome ORDER BY g.nome ASC) AS grupos 
+					FROM cliente c, pessoa p, grupo g, grupo_cliente gc 
+					WHERE c.id_pessoa = p.id AND gc.id_cliente = c.id AND gc.id_grupo = g.id 
+					GROUP BY c.id";
+
+			$resultado = $this -> conexao -> query($sql);
+
+		    $lista_cliente = array();
+			while ($row = $resultado -> fetch_assoc()) {
+				$clienteDTO = $this -> criarClienteDTODeArray($row);
+			    $lista_cliente[] = $clienteDTO;
+			}
+
+			$this -> desconectar();
+
+			return $lista_cliente;
+		}
+
+		private function criarClienteDTODeArray($row) {
+		    
+		    $cliente = $this -> criarClienteDeArray($row);
+		    $clienteDTO = new ClienteDTO($cliente);
+			$clienteDTO -> setGrupos($row["grupos"]); // atributo transiente de ClienteDTO
+
+		    return $clienteDTO; 
 		}
 
 		public function deletar($idPessoa) {

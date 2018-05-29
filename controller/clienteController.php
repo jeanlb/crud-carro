@@ -1,7 +1,24 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 
+	/* 
+	 * Verificar e pegar localização do arquivo à incluir. É preciso 
+	 * verificar a localização devido aos includes realizados em outras páginas.
+	 * Exemplo com array. 
+	*/
+	$include_dirs = array(
+		'model/dao/clienteDAO.php',
+		'../model/dao/clienteDAO.php',
+		'../../model/dao/clienteDAO.php'
+	);
+	
+	foreach ($include_dirs as $include_path) {
+		if (@file_exists($include_path)) {
+			require_once($include_path);
+			break;
+		}
+	}
+
 	require_once("controller.php");
-	require_once("../model/dao/clienteDAO.php");
 
 	class ClienteController extends Controller {
 
@@ -29,6 +46,10 @@
 
 		public function listar() {
 			return $this -> clienteDAO -> listar();
+		}
+
+		public function listarClientesComGrupos() {
+			return $this -> clienteDAO -> listarClientesComGrupos();
 		}
 
 		public function pegarClientePorId($id) {

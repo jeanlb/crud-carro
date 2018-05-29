@@ -21,6 +21,7 @@
 		// Somente usuário ADM tem permissão para acessar este link
 		if ($_SESSION['login_user']['tipo'] == 'ADM') {
 			echo "<a href='view/usuario_list.php'>Usuários</a> | ";
+			echo "<a href='view/grupo_list.php'>Grupos</a> | ";
 		}
 	?>
 

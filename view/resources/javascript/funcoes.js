@@ -37,6 +37,13 @@ function deletarUsuario(idPessoa) {
  	}
 }
 
+// grupo
+function deletarGrupo(idGrupo) {
+  if (confirm('Tem certeza de que deseja deletar este grupo?')) {
+      window.location.href = '../controller/grupoController.php?acao=deletar&id_grupo=' + idGrupo;
+  }
+}
+
 /*
 function logout() {
   	window.location.href='../controller/loginController.php?acao=logout';
