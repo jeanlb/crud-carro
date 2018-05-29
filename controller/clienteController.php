@@ -58,16 +58,20 @@
 
 		private function inserir() {
 
-			$cliente = new Cliente();
-			$cliente -> setNome($_POST['nome']);
-			$cliente -> setEmail($_POST['email']);
-			$cliente -> setTelefone($_POST['telefone']);
-			$cliente -> setDataNascimento($_POST['data_nascimento']);
+			$clienteDTO = new ClienteDTO();
+			$clienteDTO -> setNome($_POST['nome']);
+			$clienteDTO -> setEmail($_POST['email']);
+			$clienteDTO -> setTelefone($_POST['telefone']);
+			$clienteDTO -> setDataNascimento($_POST['data_nascimento']);
 
-			$foiInserido = $this -> clienteDAO -> inserir($cliente); // chamar o dao para inserir o cliente no banco de dados
+			if(isset($_POST['id_grupos'])) {
+				$clienteDTO -> setIdGrupos($_POST['id_grupos']);
+			}
+
+			$foiInserido = $this -> clienteDAO -> inserir($clienteDTO); // chamar o dao para inserir o cliente no banco de dados
 
 			// criar uma mensagem para ser exibida na página principal (de listagem)
-			$mensagem = "O cliente " . $cliente -> getNome() . " foi adicionado com sucesso!";
+			$mensagem = "O cliente " . $clienteDTO -> getNome() . " foi adicionado com sucesso!";
 			if ($foiInserido == false) $mensagem = "Erro ao adicionar cliente!";
 			$this -> criarMensagem($mensagem);
 

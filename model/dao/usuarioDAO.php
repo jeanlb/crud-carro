@@ -5,6 +5,8 @@
 	
 	class UsuarioDAO extends Conexao {
 
+		// TODO: enviar email de confirmação de cadastro (usuario)
+		// refatorar tabelas usuario e cliente para ter apenas a chave estrangeita para pessoa?
 		public function inserir($usuario) {
 
 			$foiInserido = false;

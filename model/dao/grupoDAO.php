@@ -5,9 +5,6 @@
 	
 	class GrupoDAO extends Conexao {
 
-		// no inserir/atualizar cliente escolher os grupos deste
-		// refatorar tabelas usuario e cliente para ter apenas a chave estrangeita para pessoa?
-
 		public function inserir($grupo) {
 
 			$foiInserido = false;
@@ -27,7 +24,7 @@
 		public function listar() {
 			$this -> conectar();
 
-			$sql = "SELECT * FROM grupo;";
+			$sql = "SELECT * FROM grupo ORDER BY nome ASC";
 			$resultado = $this -> conexao -> query($sql);
 
 		    $lista_grupo = array();

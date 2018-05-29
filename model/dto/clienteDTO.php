@@ -15,6 +15,7 @@
 
 		// atributo que não existe na entidade/tabela Cliente. Usado apenas para transferência de dados
 		private $grupos;
+		private $idGrupos;
 
 		function __construct() {
 
@@ -41,6 +42,14 @@
 
 		public function getGrupos() {
 			return $this -> grupos;
+		}
+
+		public function setIdGrupos($idGrupos) {
+			$this -> idGrupos = $idGrupos;
+		}
+
+		public function getIdGrupos() {
+			return $this -> idGrupos;
 		}
 
 	}

@@ -19,27 +19,40 @@
 	
 	class ClienteDAO extends Conexao {
 
-		function inserir($cliente) {
+		function inserir($clienteDTO) {
 
 			$foiInserido = false;
 			$this -> conectar();
 
 			// inserir pessoa
 			$stmt = $this -> conexao -> prepare("INSERT INTO pessoa (nome, email, data_nascimento) VALUES (?, ?, ?)");
-			$stmt -> bind_param("sss", $cliente -> getNome(), $cliente -> getEmail(), $cliente -> getDataNascimento());
+			$stmt -> bind_param("sss", $clienteDTO -> getNome(), $clienteDTO -> getEmail(), $clienteDTO -> getDataNascimento());
 
 			if ($stmt -> execute() === TRUE) {
 			    $idPessoa = $this -> conexao -> insert_id; // pegar o id da pessoa inserida
-			    $cliente -> setIdPessoa($idPessoa);
+			    $clienteDTO -> setIdPessoa($idPessoa);
 			}
 			
 			// inserir cliente com o id da pessoa inserida
-			if ($cliente -> getIdPessoa() != NULL) {
+			if ($clienteDTO -> getIdPessoa() != NULL) {
 				
 				$stmt = $this -> conexao -> prepare("INSERT INTO cliente (id_pessoa, telefone) VALUES (?, ?)");
-				$stmt -> bind_param("ii", $cliente -> getIdPessoa(), $cliente -> getTelefone());
+				$stmt -> bind_param("ii", $clienteDTO -> getIdPessoa(), $clienteDTO -> getTelefone());
 
-				if ($stmt -> execute() === TRUE) $foiInserido = true;
+				if ($stmt -> execute() === TRUE) {
+				    $clienteDTO -> setId($this -> conexao -> insert_id); // pegar o id do cliente inserido
+				    $foiInserido = true;
+				}
+			}
+
+			// inserir cliente em grupos
+			if ($clienteDTO -> getId() != NULL && $clienteDTO -> getIdGrupos() != NULL) {
+				$sql = "";
+				foreach ($clienteDTO -> getIdGrupos() as $idGrupo) {
+					$sql .= "INSERT INTO grupo_cliente (id_grupo, id_cliente) 
+							 VALUES (" . $idGrupo . ", " . $clienteDTO -> getId() . ");";
+				}
+				$this -> conexao -> multi_query($sql);
 			}
 
 			$stmt -> close();

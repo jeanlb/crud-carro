@@ -4,6 +4,11 @@
 	if (!isset($_SESSION['login_user'])) {
 		header("location: ../view/login.php");
 	}
+
+	require_once("../controller/grupoController.php");
+
+	$grupoController = new GrupoController();
+	$grupos = $grupoController -> listar();
 ?>
 
 <html>
@@ -34,6 +39,23 @@
 			<tr> 
 				<td>Data de Nascimento</td>
 				<td><input type="date" name="data_nascimento"></td>
+			</tr>
+			<tr> 
+				<td>Grupos</td>
+				<td>
+					<!-- TODO: usar input datalist ou ajax para autocompletar -->
+					<select name="id_grupos[]" style="height: 90px;" multiple>
+
+						<?php foreach ($grupos as $grupo) : ?>
+
+							<option value = <?php echo $grupo -> getId(); ?> >
+								<?php echo $grupo -> getNome(); ?>
+							</option>
+
+						<?php endforeach; ?>
+
+					</select>
+				</td>
 			</tr>
 			<tr> 
 				<td></td>
