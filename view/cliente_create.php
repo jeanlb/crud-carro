@@ -44,8 +44,9 @@
 				<td>Grupos</td>
 				<td>
 					<!-- TODO: usar input datalist ou ajax para autocompletar -->
-					<select name="id_grupos[]" style="height: 90px;" multiple>
+					<select name="id_grupos[]" style="height: 101px;" multiple>
 
+						<option value=''>Nenhum Grupo</option>
 						<?php foreach ($grupos as $grupo) : ?>
 
 							<option value = <?php echo $grupo -> getId(); ?> >

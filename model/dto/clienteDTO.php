@@ -30,6 +30,7 @@
 		private function criarClienteDTO($cliente) {
 
 			$this -> setId($cliente -> getId());
+			$this -> setIdPessoa($cliente -> getIdPessoa());
 			$this -> setNome($cliente -> getNome());
 			$this -> setEmail($cliente -> getEmail());
 			$this -> setTelefone($cliente -> getTelefone());

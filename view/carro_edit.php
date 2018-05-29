@@ -53,7 +53,6 @@
 			<tr> 
 				<td>Cliente</td>
 				<td>
-					<!-- TODO: usar input datalist ou ajax para autocompletar -->
 					<select name="id_cliente" required>
 
 						<?php foreach ($clientes as $cliente) : ?>

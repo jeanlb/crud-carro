@@ -56,6 +56,10 @@
 			return $this -> clienteDAO -> pegarClientePorId($id);
 		}
 
+		public function pegarClienteComGruposPorId($id) {
+			return $this -> clienteDAO -> pegarClienteComGruposPorId($id);
+		}
+
 		private function inserir() {
 
 			$clienteDTO = new ClienteDTO();
@@ -80,18 +84,22 @@
 
 		private function atualizar() {
 			
-			$cliente = new Cliente();
-			$cliente -> setId($_POST['id']);
-			$cliente -> setIdPessoa($_POST['id_pessoa']);
-			$cliente -> setNome($_POST['nome']);
-			$cliente -> setEmail($_POST['email']);
-			$cliente -> setTelefone($_POST['telefone']);
-			$cliente -> setDataNascimento($_POST['data_nascimento']);
+			$clienteDTO = new ClienteDTO();
+			$clienteDTO -> setId($_POST['id']);
+			$clienteDTO -> setIdPessoa($_POST['id_pessoa']);
+			$clienteDTO -> setNome($_POST['nome']);
+			$clienteDTO -> setEmail($_POST['email']);
+			$clienteDTO -> setTelefone($_POST['telefone']);
+			$clienteDTO -> setDataNascimento($_POST['data_nascimento']);
 
-			$foiAtualizado = $this -> clienteDAO -> atualizar($cliente);
+			if(isset($_POST['id_grupos'])) {
+				$clienteDTO -> setIdGrupos($_POST['id_grupos']);
+			}
 
-			$mensagem = "O cliente " . $cliente -> getNome() . " foi atualizado com sucesso!";
-			if ($foiAtualizado == false) $mensagem = "Erro ao atualizar cliente!";
+			$foiAtualizado = $this -> clienteDAO -> atualizar($clienteDTO);
+
+			$mensagem = "O cliente " . $clienteDTO -> getNome() . " foi atualizado com sucesso!";
+			if (!$foiAtualizado) $mensagem = "Erro ao atualizar cliente!";
 			$this -> criarMensagem($mensagem);
 
 			$this -> redirecionarPagina();

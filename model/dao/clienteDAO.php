@@ -61,22 +61,37 @@
 		    return $foiInserido;
 		}
 
-		function atualizar($cliente) {
+		function atualizar($clienteDTO) {
 
 			$foiAtualizado = false;
 			$this -> conectar();
 
 			// atualizar pessoa
 			$stmt = $this -> conexao -> prepare("UPDATE pessoa SET nome = ? , email = ? , data_nascimento = ? WHERE id = ?");
-			$stmt -> bind_param("sssi", $cliente -> getNome(), $cliente -> getEmail(), 
-				$cliente -> getDataNascimento(), $cliente -> getIdPessoa());
+			$stmt -> bind_param("sssi", $clienteDTO -> getNome(), $clienteDTO -> getEmail(), 
+				$clienteDTO -> getDataNascimento(), $clienteDTO -> getIdPessoa());
 			$stmt -> execute();
 
 			// atualizar cliente
 			$stmt = $this -> conexao -> prepare("UPDATE cliente SET telefone = ? WHERE id = ?");
-			$stmt -> bind_param("ii", $cliente -> getTelefone(), $cliente -> getId());
+			$stmt -> bind_param("ii", $clienteDTO -> getTelefone(), $clienteDTO -> getId());
 
 			if ($stmt -> execute() === TRUE) $foiAtualizado = true;
+
+			// deletar associacao com os grupos atuais
+			$stmt = $this -> conexao -> prepare("DELETE FROM grupo_cliente WHERE id_cliente = ?");
+			$stmt -> bind_param("i", $clienteDTO -> getId());
+			$stmt -> execute();
+
+			// inserir associacoes atualizadas com grupos
+			if ($clienteDTO -> getIdGrupos() != NULL) {
+				$sql = "";
+				foreach ($clienteDTO -> getIdGrupos() as $idGrupo) {
+					$sql .= "INSERT INTO grupo_cliente (id_grupo, id_cliente) 
+							 VALUES (" . $idGrupo . ", " . $clienteDTO -> getId() . ");";
+				}
+				$this -> conexao -> multi_query($sql);
+			}
 
 			$stmt -> close();
 			$this -> desconectar();
@@ -140,6 +155,7 @@
 			$this -> conectar();
 
 			$sql = "SELECT c.id, c.id_pessoa, c.telefone, p.nome, p.email, p.data_nascimento, 
+					GROUP_CONCAT(g.id) AS id_grupos, 
 					GROUP_CONCAT(g.nome ORDER BY g.nome ASC) AS grupos 
 					FROM cliente c, pessoa p, grupo g, grupo_cliente gc 
 					WHERE c.id_pessoa = p.id AND gc.id_cliente = c.id AND gc.id_grupo = g.id 
@@ -158,11 +174,40 @@
 			return $lista_cliente;
 		}
 
+		public function pegarClienteComGruposPorId($id) {
+			$this -> conectar();
+
+			$sql = "SELECT c.id, c.id_pessoa, c.telefone, p.nome, p.email, p.data_nascimento,
+					GROUP_CONCAT(g.id) AS id_grupos,
+					GROUP_CONCAT(g.nome ORDER BY g.nome ASC) AS grupos
+					FROM cliente c, pessoa p, grupo g, grupo_cliente gc
+					WHERE c.id_pessoa = p.id AND gc.id_cliente = c.id 
+					AND gc.id_grupo = g.id AND c.id = ?";
+
+			$stmt = $this -> conexao -> prepare($sql);
+			$stmt -> bind_param("i", $id);
+			$stmt -> execute();
+			$resultado = $stmt -> get_result();
+
+			$clienteDTO = new ClienteDTO();
+			while ($row = $resultado -> fetch_assoc()) {
+				$clienteDTO = $this -> criarClienteDTODeArray($row);
+			}
+
+			$stmt -> close();
+			$this -> desconectar();
+
+			return $clienteDTO;
+		}
+
 		private function criarClienteDTODeArray($row) {
 		    
 		    $cliente = $this -> criarClienteDeArray($row);
 		    $clienteDTO = new ClienteDTO($cliente);
-			$clienteDTO -> setGrupos($row["grupos"]); // atributo transiente de ClienteDTO
+
+		    // atributos transientes de ClienteDTO
+		    $clienteDTO -> setIdGrupos(explode(",", $row["id_grupos"])); // converte concatenacao de id_grupos em array
+			$clienteDTO -> setGrupos($row["grupos"]);
 
 		    return $clienteDTO; 
 		}

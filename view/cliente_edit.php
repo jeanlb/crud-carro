@@ -10,7 +10,12 @@
 	$id = $_GET['id']; // id que vem da pagina de listagem
 
 	$clienteController = new ClienteController();
-	$cliente = $clienteController -> pegarClientePorId($id);
+	$clienteDTO = $clienteController -> pegarClienteComGruposPorId($id);
+
+	require_once("../controller/grupoController.php");
+
+	$grupoController = new GrupoController();
+	$grupos = $grupoController -> listar();
 ?>
 
 <html>
@@ -29,28 +34,44 @@
 		<table width="35%" border="0">
 			<tr> 
 				<td>Nome</td>
-				<td><input type="text" name="nome" value="<?php echo $cliente -> getNome(); ?>" required></td>
+				<td><input type="text" name="nome" value="<?php echo $clienteDTO -> getNome(); ?>" required></td>
 			</tr>
 			<tr> 
 				<td>Email</td>
-				<td><input type="email" name="email" value="<?php echo $cliente -> getEmail(); ?>" required></td>
+				<td><input type="email" name="email" value="<?php echo $clienteDTO -> getEmail(); ?>" required></td>
 			</tr>
 			<tr> 
 				<td>Telefone</td>
-				<td><input type="number" name="telefone" value="<?php echo $cliente -> getTelefone(); ?>" required></td>
+				<td><input type="number" name="telefone" value="<?php echo $clienteDTO -> getTelefone(); ?>" required></td>
 			</tr>
 			<tr> 
 				<td>Data de Nascimento</td>
 				<td>
 					<!-- TODO: corrigir: conversao da data, vindo do banco, para o formato date do html5 não está funcionando -->
-					<input type="text" name="data_nascimento" value="<?php echo $cliente -> getDataNascimentoFormatoPTBR(); ?>" >
+					<input type="text" name="data_nascimento" value="<?php echo $clienteDTO -> getDataNascimentoFormatoPTBR(); ?>" >
+				</td>
+			</tr>
+			<tr> 
+				<td>Grupos</td>
+				<td>
+					<select name="id_grupos[]" style="height: 101px;" multiple>
+
+						<option value=''>Nenhum Grupo</option>
+                		<?php foreach ($grupos as $grupo) : ?>
+							<option value = <?php echo $grupo -> getId(); ?> 
+									<?php echo (in_array($grupo -> getId(), $clienteDTO -> getIdGrupos())) ? 'selected' : ''; ?> >
+										<?php echo $grupo -> getNome(); ?>
+							</option>
+						<?php endforeach; ?>
+
+					</select>
 				</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
-					<input type="hidden" name="id" value="<?php echo $cliente -> getId(); ?>">
-					<input type="hidden" name="id_pessoa" value="<?php echo $cliente -> getIdPessoa(); ?>">
+					<input type="hidden" name="id" value="<?php echo $clienteDTO -> getId(); ?>">
+					<input type="hidden" name="id_pessoa" value="<?php echo $clienteDTO -> getIdPessoa(); ?>">
 					<input type="hidden" name="acao" value="atualizar"> <!-- acao utilizada no controller -->
 					<input type="submit" value="Atualizar">
 				</td>
