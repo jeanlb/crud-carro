@@ -19,7 +19,7 @@
 	
 	class ClienteDAO extends Conexao {
 
-		function inserir($clienteDTO) {
+		public function inserir($clienteDTO) {
 
 			$foiInserido = false;
 			$this -> conectar();
@@ -61,7 +61,7 @@
 		    return $foiInserido;
 		}
 
-		function atualizar($clienteDTO) {
+		public function atualizar($clienteDTO) {
 
 			$foiAtualizado = false;
 			$this -> conectar();

@@ -11,10 +11,23 @@ function editar(id) {
 }
 
 function deletar(id) {
-  // já neste funciona com window.location.href. nesta requisição não há redirecionamento de página no browser
-	if (confirm('Tem certeza de que deseja deletar este carro?')) {
+   /* já neste funciona com window.location.href. 
+      nesta requisição não há redirecionamento de página no browser
+      fazer requisicao ao controlador, passando os parametros acao e id_pessoa */
+  if (confirm('Tem certeza de que deseja deletar este carro?')) {
   		window.location.href = 'controller/carroController.php?acao=deletar&id=' + id;
  	}
+}
+
+function deletarUsuario(idPessoa) {
+  if (confirm('Tem certeza que deseja deletar este usuário?')) {
+
+    /* fazer requisicao ao controlador, passando
+       os parametros acao e id_pessoa */
+    window.location.href = 
+      "../controller/usuarioController.php?acao=deletar&id_pessoa=" 
+        + idPessoa;
+  }
 }
 
 // cliente

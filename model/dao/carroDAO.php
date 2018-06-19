@@ -24,7 +24,7 @@
 	
 	class CarroDAO extends Conexao {
 
-		function inserir($carro) {
+		public function inserir($carro) {
 			$this -> conectar();
 
 			$stmt = $this -> conexao -> prepare("INSERT INTO carro (id_cliente, nome, marca, ano, cor, placa, caminho_imagem) 
@@ -43,7 +43,7 @@
 		    $this -> desconectar();
 		}
 
-		function atualizar($carro) {
+		public function atualizar($carro) {
 			$this -> conectar();
 
 			$stmt = $this -> conexao -> prepare("UPDATE carro SET id_cliente = ?, nome = ? ,  

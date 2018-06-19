@@ -47,7 +47,10 @@
 			<?php foreach ($carros as $carro) : ?>
 				<tr>
 					<td align="center">
-						<?php echo $carro -> getId(); ?>
+						<?php 
+							$idCarro = $carro -> getId();
+							echo $idCarro;
+						?>
 					</td>
 					<td><?php echo $carro -> getNome(); ?></td>
 					<td><?php echo $carro -> getMarca(); ?></td>
@@ -56,9 +59,15 @@
 					<td><?php echo $carro -> getPlaca(); ?></td>
 
 					<td align="center">
-						<a id="visualizar" href="javascript:visualizar('<?php echo $carro -> getId(); ?>')">Visualizar</a> |
-						<a id="editar" href="javascript:editar('<?php echo $carro -> getId(); ?>')">Editar</a> |
-						<a id="deletar" href="javascript:deletar('<?php echo $carro -> getId(); ?>')">Deletar</a>
+						<button onclick="visualizar(<?php echo $idCarro; ?>)">
+							Visualizar
+						</button>
+						<button onclick="editar(<?php echo $idCarro; ?>)">
+							Editar
+						</button>
+						<button onclick="deletar(<?php echo $idCarro; ?>)">
+							Deletar
+						</button>
 					</td>
 				</tr>
 			<?php endforeach; ?>
