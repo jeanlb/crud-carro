@@ -19,17 +19,6 @@ function deletar(id) {
  	}
 }
 
-function deletarUsuario(idPessoa) {
-  if (confirm('Tem certeza que deseja deletar este usuário?')) {
-
-    /* fazer requisicao ao controlador, passando
-       os parametros acao e id_pessoa */
-    window.location.href = 
-      "../controller/usuarioController.php?acao=deletar&id_pessoa=" 
-        + idPessoa;
-  }
-}
-
 // cliente
 function editarCliente(id) {
     /* no crud-carro/view/cliente_list.php, o redirecionamento com js 
